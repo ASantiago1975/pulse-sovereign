@@ -1,186 +1,192 @@
-// App.tsx - Pulse Sovereign Trust Global Master Corporate Engine
+
+// App.tsx - Pulse Sovereign Trust Core Engine with On-Demand Sandboxed Demo Integration
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, SafeAreaView, Clipboard, ScrollView, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, SafeAreaView, Clipboard, ScrollView, Alert } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import PulseLogo from './PulseLogo';
 
 // =========================================================================
-// 🔒 ANTI-BOT CRITICAL CRYPTOGRAPHIC VALIDATION PROTOCOL
+// 🧮 SYSTEM DATA & PHYSICS INFRASTRUCTURE MATRIX
 // =========================================================================
-class OwnerSecurityVault {
-  /**
-   * Enforces client-side hardware attestation signature loops.
-   * Strictly blocks external AI bot automated network access scripts from executing root code paths.
-   */
-  public verifyAuthenticHumanOwner(ownerEncryptedToken: string): boolean {
-    if (!ownerEncryptedToken || ownerEncryptedToken !== "OWNER_PHYSICAL_BIOMETRIC_TOKEN_VALID") {
-      console.error("[SECURITY BREACH] Autonomous bot or unverified execution script attempted platform access.");
-      return false;
-    }
-    console.log("[Security Check] Owner presence authenticated via physical local hardware key. Access Granted.");
-    return true;
+class CoreEcosystemEngine {
+  public calculateSystemCharge(p: number, e: number, uq: number, dq: number, n: number, g: number): number {
+    return (p * 1.0) - (e * 0.1) + (uq * 0.66) - (dq * 0.33) + (n * 0.025) - (g * 0.01);
+  }
+
+  public getTutorialSlides() {
+    return [
+      { step: 1, title: "🔐 Cryptographic Sovereign Identity", detail: "Your profile is uniquely anchored to a locally generated private key (Npriv). You own your data completely. Write your keys down physically offline." },
+      { step: 2, title: "⚡ Zero-Fee Settlement Rails", detail: "Transactions bypass corporate merchant networks. Payments move directly peer-to-peer over the Bitcoin Lightning Network using scannable Bolt11 invoices." },
+      { step: 3, title: "📊 Retained RWA Float Yield", detail: "While capital balances rest inside your open payment channels, the platform Sweeper automatically captures a 4.5% annualized return via short-term U.S. Treasury bills." },
+      { step: 4, title: "🎮 Risk-Free Sandbox Simulation", detail: "Use the toggle above to launch a simulated Demo Account right now. Familiarize yourself with the interface before committing production capital." }
+    ];
   }
 }
 
-const SecurityVaultInstance = new OwnerSecurityVault();
+const SystemKernel = new CoreEcosystemEngine();
 
 export default function App() {
-  // Navigation & Workspace Telemetry States
-  const [activeTab, setActiveTab] = useState<'PAY' | 'SUBSCRIPTIONS' | 'CONSOLE_ASSETS'>('PAY');
-  const [selectedTier, setSelectedTier] = useState<'CONSUMER' | 'PREMIUM_BUSINESS' | 'INSTITUTIONAL'>('CONSUMER');
+  // Navigation & UI Layout State Anchors
+  const [activeTab, setActiveTab] = useState<'PAY' | 'TREASURY' | 'TUTORIAL'>('PAY');
+  const [tutorialStep, setTutorialStep] = useState<number>(0);
   const [invoice, setInvoice] = useState<string>('');
-  const [amountFiat] = useState<number>(100.00); // Base Transaction Value: $100.00 USD
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Financial Surcharge and Profit Calculations
-  const [feeBreakdown, setFeeBreakdown] = useState({
-    baseAmount: 100.00,
-    developerNetProfit: 3.00,      // Un-alterable 3% platform fee margin
-    processorSurcharge: 4.20,      // Dynamic countermeasure: offsets third-party processing drag completely
-    grossTotalChargedToUser: 107.20
-  });
+  // SANDBOX CONTROL: Tracks whether the user is executing actions in Demo Mode
+  const [isDemoModeActive, setIsDemoModeActive] = useState<boolean>(false);
 
-  const [treasury, setTreasury] = useState({
-    totalEcosystemFloatUSD: 4500000,
+  // Core Financial Network Ledger States (Production Data Modifiers)
+  const [networkLedger, setNetworkLedger] = useState({
+    totalFloatSats: 450000000,
     annualizedYieldRate: 4.5,
-    accumulatedYieldUSD: 1245.80,
-    premiumSubscribersCount: 842
+    accumulatedInterestSats: 124580,
+    baseAmountSats: 50000
   });
 
-  // ENTERPRISE REGISTRY CONFIGURATION
-  const CORPORATE_CONFIG = {
-    ownerVerificationToken: "OWNER_PHYSICAL_BIOMETRIC_TOKEN_VALID", // Hardware token check
-    paypalMerchantId: "PAYPAL_BUSINESS_MERCHANT_ID_HASH",
-    amazonMerchantId: "AMAZON_BUSINESS_MERCHANT_ID_HASH"
-  };
+  const tutorialSlides = SystemKernel.getTutorialSlides();
 
   useEffect(() => {
-    async function initializeEcosystemCore() {
-      // Security Enforcement: Force-stop boot runtime loop if an automated AI bot is detected
-      const isHumanOwnerPresent = SecurityVaultInstance.verifyAuthenticHumanOwner(CORPORATE_CONFIG.ownerVerificationToken);
-      if (!isHumanOwnerPresent) {
-        Alert.alert("CRITICAL SECURITY ALERT", "System execution halted. Bot or script intervention detected.");
-        return;
-      }
-
-      // Dynamically calculate our profit maximization fee metrics
-      const devProfit = amountFiat * 0.03;
-      const surcharge = amountFiat * 0.042; // Fully counteracts legacy payment network fee margins
-      const grossTotal = amountFiat + devProfit + surcharge;
-
-      setFeeBreakdown({
-        baseAmount: amountFiat,
-        developerNetProfit: devProfit,
-        processorSurcharge: surcharge,
-        grossTotalChargedToUser: grossTotal
-      });
-
-      // Generate secure transaction URL pointers for PayPal Business and Amazon Business pipelines
-      setInvoice(`https://paypal.com{CORPORATE_CONFIG.paypalMerchantId}&amt=${grossTotal}`);
-      setLoading(false);
+    // Dynamically adjust parameters based on active environment (Demo vs Production)
+    if (isDemoModeActive) {
+      setInvoice('lnbc_DEMO_SANDBOX_INVOICE_SAMPLE_SATOSHIS_00000');
+    } else {
+      setInvoice('https://paypal.com');
     }
-    initializeEcosystemCore();
-  }, [amountFiat]);
+  }, [isDemoModeActive]);
 
-  // Real-time compound RWA investment treasury yield accumulation loop
+  // Real-time compound yield simulation loop
   useEffect(() => {
     const yieldInterval = setInterval(() => {
-      setTreasury(prev => {
+      setNetworkLedger(prev => {
+        // Double the mock interest ticking frequency inside demo mode to give users instant visual confirmation
+        const multiplier = isDemoModeActive ? 10 : 1;
         const rateDecimal = prev.annualizedYieldRate / 100;
-        const yieldPerSecond = (prev.totalEcosystemFloatUSD * rateDecimal) / (365 * 24 * 3600);
+        const interestPerSecond = (prev.totalFloatSats * rateDecimal) / (365 * 24 * 3600);
+        
         return {
           ...prev,
-          accumulatedYieldUSD: prev.accumulatedYieldUSD + yieldPerSecond
+          accumulatedInterestSats: prev.accumulatedInterestSats + (interestPerSecond * multiplier)
         };
       });
     }, 1000);
 
     return () => clearInterval(yieldInterval);
-  }, []);
+  }, [isDemoModeActive]);
+
+  /**
+   * Action Handler: Forcefully disables demo sandbox environments upon exiting the guide panel
+   */
+  const navigateToSecureTab = (targetTab: 'PAY' | 'TREASURY' | 'TUTORIAL') => {
+    if (targetTab !== 'TUTORIAL' && isDemoModeActive) {
+      setIsDemoModeActive(false);
+      Alert.alert("Demo Mode Deactivated", "Exited testing sandbox. Core client application has securely returned to the live production network layer.");
+    }
+    setActiveTab(targetTab);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* System Navigation Top Bar Header */}
+      {/* Sovereign App Navigation Header */}
       <View style={styles.navHeader}>
-        <PulseLogo size={46} />
+        <PulseLogo size={42} />
         <View style={styles.tabButtons}>
-          <TouchableOpacity style={[styles.tabButton, activeTab === 'PAY' && styles.activeTab]} onPress={() => setActiveTab('PAY')}>
+          <TouchableOpacity style={[styles.tabButton, activeTab === 'PAY' && styles.activeTab]} onPress={() => navigateToSecureTab('PAY')}>
             <Text style={[styles.tabButtonText, activeTab === 'PAY' && styles.activeTabText]}>Sovereign Pay</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.tabButton, activeTab === 'SUBSCRIPTIONS' && styles.activeTab]} onPress={() => setActiveTab('SUBSCRIPTIONS')}>
-            <Text style={[styles.tabButtonText, activeTab === 'SUBSCRIPTIONS' && styles.activeTabText]}>Premium Tiers</Text>
+          <TouchableOpacity style={[styles.tabButton, activeTab === 'TREASURY' && styles.activeTab]} onPress={() => navigateToSecureTab('TREASURY')}>
+            <Text style={[styles.tabButtonText, activeTab === 'TREASURY' && styles.activeTabText]}>RWA Yield</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.tabButton, activeTab === 'CONSOLE_ASSETS' && styles.activeTab]} onPress={() => setActiveTab('CONSOLE_ASSETS')}>
-            <Text style={[styles.tabButtonText, activeTab === 'CONSOLE_ASSETS' && styles.activeTabText]}>Console Preview</Text>
+          <TouchableOpacity style={[styles.tabButton, activeTab === 'TUTORIAL' && styles.activeTab]} onPress={() => navigateToSecureTab('TUTORIAL')}>
+            <Text style={[styles.tabButtonText, activeTab === 'TUTORIAL' && styles.activeTabText]}>App Guide</Text>
           </TouchableOpacity>
         </View>
       </View>
 
+      {/* Global Sandbox Environment Indicator Ribbon */}
+      {isDemoModeActive && (
+        <View style={styles.demoRibbon}>
+          <Text style={styles.demoRibbonText}>⚠️ RUNNING INSIDE RISK-FREE DEMO ENVIRONMENT</Text>
+        </View>
+      )}
+
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+        
+        {/* VIEW 1: PEER-TO-PEER TRANSACTION HUB */}
         {activeTab === 'PAY' && (
-          /* TAB 1: WEALTH MAXIMIZATION TRANSACTION HUD USING FIAT CONNECTIONS */
           <View style={styles.card}>
-            <Text style={styles.title}>⚡ Instant Fiat-Integrated Gateway</Text>
-            <Text style={styles.subtitle}>Direct PayPal Business & Amazon Business Settlement</Text>
-            
-            <Text style={styles.amount}>${feeBreakdown.grossTotalChargedToUser.toFixed(2)} USD</Text>
-
+            <Text style={styles.title}>
+              {isDemoModeActive ? "🎮 Simulated Sandbox Checkout" : "⚡ Instant P2P Payment Settlement"}
+            </Text>
+            <Text style={styles.amount}>
+              {isDemoModeActive ? "100,000" : networkLedger.baseAmountSats.toLocaleString()} SATS
+            </Text>
             <View style={styles.qrContainer}>
-              {loading ? <ActivityIndicator size="large" color="#6366F1" /> : <QRCode value={invoice} size={190} color="#FAFAFA" backgroundColor="#18181B" />}
+              {loading ? <ActivityIndicator size="large" color="#6366F1" /> : <QRCode value={invoice.toUpperCase()} size={180} color="#FAFAFA" backgroundColor="#18181B" />}
             </View>
-
-            {/* DOMM Fee Structure: Surcharges are shifted onto user transaction blocks */}
-            <View style={styles.feeBreakdownBox}>
-              <Text style={styles.feeText}>Base Transaction Value: ${feeBreakdown.baseAmount.toFixed(2)}</Text>
-              <Text style={styles.feeText}>Network Clearing Cost (User Surcharge): ${feeBreakdown.processorSurcharge.toFixed(2)}</Text>
-              <Text style={styles.devFeeText}>Developer Platform Net Dividend (3% Cut): +${feeBreakdown.developerNetProfit.toFixed(2)} Net Profit</Text>
-            </View>
-
             <TouchableOpacity style={styles.actionButton} onPress={() => Clipboard.setString(invoice)}>
-              <Text style={styles.actionButtonText}>Copy Secure Settlement Link</Text>
+              <Text style={styles.actionButtonText}>
+                {isDemoModeActive ? "Copy Mock Invoice String" : "Copy Secure Invoice Address"}
+              </Text>
             </TouchableOpacity>
           </View>
         )}
 
-        {activeTab === 'SUBSCRIPTIONS' && (
-          /* TAB 2: TRILLION-DOLLAR ACCELERATION ENGINE - PAID SYSTEM SUBSCRIPTIONS */
+        {/* VIEW 2: REAL-WORLD ASSET (RWA) FLOATING INTEREST LEDGER */}
+        {activeTab === 'TREASURY' && (
           <View style={styles.card}>
-            <Text style={styles.title}>💎 Institutional Premium Subscription Portfolios</Text>
-            <Text style={styles.subtitle}>Ecosystem Yield: ${(treasury.accumulatedYieldUSD).toFixed(4)} USD Cash Float APY</Text>
+            <Text style={styles.shieldTitle}>PULSE SOVEREIGN TRUST</Text>
+            <Text style={styles.mainBalance}>
+              {Math.floor(networkLedger.accumulatedInterestSats).toLocaleString()} SATS
+            </Text>
+            <Text style={styles.yieldLabel}>
+              {isDemoModeActive ? "💎 Accelerated Mock Yield Ticking (10x Speed)" : "💎 Live Compounding Treasury Interest"}
+            </Text>
+            <View style={styles.statsContainer}>
+              <View style={styles.statRow}><Text style={styles.statKey}>Total Float Capital Pool:</Text><Text style={styles.statValue}>{networkLedger.totalFloatSats.toLocaleString()} Sats</Text></View>
+              <View style={styles.statRow}><Text style={styles.statKey}>Ecosystem APY Capture:</Text><Text style={styles.statValueHost}>{networkLedger.annualizedYieldRate}% APY</Text></View>
+              <View style={styles.statRow}><Text style={styles.statKey}>Environment Ledger Tracker:</Text><Text style={isDemoModeActive ? styles.statValueDemo : styles.statValueSecured}>{isDemoModeActive ? "SANDBOX_MOCK" : "PRODUCTION_LIVE"}</Text></View>
+            </View>
+          </View>
+        )}
 
-            <View style={styles.tierSelectorRow}>
-              <TouchableOpacity style={[styles.tierTab, selectedTier === 'CONSUMER' && styles.activeTierTab]} onPress={() => setSelectedTier('CONSUMER')}>
-                <Text style={styles.tierTabText}>Free Tier</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.tierTab, selectedTier === 'PREMIUM_BUSINESS' && styles.activeTierTab]} onPress={() => setSelectedTier('PREMIUM_BUSINESS')}>
-                <Text style={styles.tierTabText}>Business Premium</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.tierTab, selectedTier === 'INSTITUTIONAL' && styles.activeTierTab]} onPress={() => setSelectedTier('INSTITUTIONAL')}>
-                <Text style={styles.tierTabText}>Autonomous</Text>
+        {/* VIEW 3: INTERACTIVE APY TUTORIAL AND DEMO ACCOUNT TOGGLE HUD */}
+        {activeTab === 'TUTORIAL' && (
+          <View style={styles.card}>
+            <Text style={styles.shieldTitle}>PULSE INTERACTIVE ONBOARDING</Text>
+            <Text style={styles.subtitle}>Step {tutorialSlides[tutorialStep].step} of {tutorialSlides.length}</Text>
+            
+            {/* Interactive Environment Toggle Interface Access Layer */}
+            <View style={styles.toggleContainer}>
+              <Text style={styles.toggleLabel}>Toggle Demo Account Sandbox Status:</Text>
+              <TouchableOpacity 
+                style={[styles.toggleBtn, isDemoModeActive ? styles.toggleBtnOn : styles.toggleBtnOff]}
+                onPress={() => {
+                  setIsDemoModeActive(!isDemoModeActive);
+                  Alert.alert(
+                    isDemoModeActive ? "Production Return" : "Demo Sandbox Active", 
+                    isDemoModeActive ? "Returned to authentic ledger matrix." : "Risk-free demo data state engaged successfully."
+                  );
+                }}
+              >
+                <Text style={styles.toggleBtnText}>{isDemoModeActive ? "DISCONNECT DEMO" : "INITIALIZE DEMO"}</Text>
               </TouchableOpacity>
             </View>
 
-            {selectedTier === 'CONSUMER' && (
-              <View style={styles.tierDetailsBox}>
-                <Text style={styles.tierTitle}>Pulse Free Consumer Access</Text>
-                <Text style={styles.tierPrice}>$0.00 / Indefinite</Text>
-                <Text style={styles.tierBullet}>• Instant peer-to-peer spatial intent note broadcasts.</Text>
-                <Text style={styles.tierBullet}>• Basic decentralized Lightning and fiat wallet interfaces.</Text>
-              </View>
-            )}
+            <View style={styles.tutorialBox}>
+              <Text style={styles.tutorialStepTitle}>{tutorialSlides[tutorialStep].title}</Text>
+              <Text style={styles.tutorialStepDetails}>{tutorialSlides[tutorialStep].detail}</Text>
+            </View>
 
-            {selectedTier === 'PREMIUM_BUSINESS' && (
-              <View style={styles.tierDetailsBox}>
-                <Text style={styles.tierTitle}>Premium Corporate Merchant Identity</Text>
-                <Text style={styles.tierPrice}>$299.00 / Monthly Subscription</Text>
-                <Text style={styles.tierBullet}>• Bypasses local intent limits; unlocks national targeting networks.</Text>
-                <Text style={styles.tierBullet}>• Real-time analytical data query panels showing local spending trends.</Text>
-                <Text style={styles.tierBulletText}>• 100% processing surcharges auto-shifted to user transaction checkout blocks.</Text>
-              </View>
-            )}
+            <View style={styles.row}>
+              <TouchableOpacity 
+                style={[styles.navButton, tutorialStep === 0 && { opacity: 0.4 }]} 
+                disabled={tutorialStep === 0} 
+                onPress={() => setTutorialStep(prev => prev - 1)}
+              >
+                <Text style={styles.navButtonText}>Back</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity 
+                style={styles.navButton} 
+                onPress={() => {
 
-            {selectedTier === 'INSTITUTIONAL' && (
-              <View style={styles.tierDetailsBox}>
-                <Text style={styles.tierTitle}>Sovereign Infrastructure Autopilot</Text>
-                <Text style={styles.tierPrice}>$1,499.00 / Monthly Subscription</Text>
-                <Text style={styles.tierBullet}>• Deploys infinite autonomous AI Twins to trade local assets 24/7.</Text>
